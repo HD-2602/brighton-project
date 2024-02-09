@@ -1,0 +1,75 @@
+<!-- Header Start -->
+<div class="container-fluid bg-primary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+        <h3 class="display-3 font-weight-bold text-white">Search Courses</h3>
+        <div class="d-inline-flex text-white">
+            <p class="m-0"><a class="text-white" href="">Home</a></p>
+            <p class="m-0 px-2">/</p>
+            <p class="m-0">Search Courses</p>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- Search Registered Courses Of Student For Parent Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <!-- Part 1:  Search Registered Courses Of Student By Child Tel Start -->
+        <div class="text-center pb-2">
+            <p class="section-title px-5">
+                <span class="px-2">To Search </span>
+            </p>
+        </div>
+
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-5">
+                <div class="card border-0">
+                    <div class="card-header bg-secondary text-center p-4">
+                        <h1 class="text-white m-0">Search </h1>
+                    </div>
+                    <div class="card-body rounded-bottom bg-primary p-5">
+                        <form [formGroup]="searchCoursesForm">
+                            <div class="form-group">
+                                <input type="number" class="form-control border-0 p-4"
+                                    placeholder=" Child's Phone Number" formControlName="childTel" />
+                            </div>
+                            <div *ngIf="searchCoursesForm.controls['childTel'].invalid &&
+                                 (searchCoursesForm.controls['childTel'].touched ||
+                                 searchCoursesForm.controls['childTel'].dirty)">
+                                <div *ngIf="searchCoursesForm.controls['childTel'].errors.required" class="text-danger">
+                                    Child's Tel is required
+                                </div>
+                                <div *ngIf="searchCoursesForm.controls['childTel'].errors.pattern" class="text-danger">
+                                    Child's Tel must have 8 numbers
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-secondary btn-block border-0 py-3" (click)="searchCourses()"
+                                    [disabled]="searchCoursesForm.invalid" type="submit">SEARCH</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Part 1:  Search Registered Courses Of Student By Child Tel End -->
+
+         <!-- Part 2 :  Display Registered Courses Of Student Start -->
+        <div class="container-fluid pt-5">
+            <div class="container">
+                <div class="row">
+                    <div *ngFor="let course of enrollmentCourses" class="col-lg-4 mb-5">
+                        <app-course-student [courseStudentInput]="course"></app-course-student>
+                    </div>
+                </div>
+
+                <div *ngIf="enrollmentCourses?.length == 0">
+                    No Founded Enrollment Courses
+                </div>
+            </div>
+        </div>
+        <!-- Part 2 :  Display Registered Courses Of Student End -->
+
+    </div>
+</div>
+<!-- Search Registered Courses Of Student For Parent End -->

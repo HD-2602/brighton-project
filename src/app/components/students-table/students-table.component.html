@@ -1,0 +1,22 @@
+<!-- Display Students Table For Admin Start -->
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col" class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of studentsTab">
+        <td>{{student.firstName}}</td>
+        <td>{{student.lastName}}</td>
+        <td class="text-center">
+            <button class="btn btn-warning" (click)="goToAssignCourse(student._id)">Assign Course</button>
+            <button class="btn btn-danger" (click)="deleteStudent(student._id)">Delete</button>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <!-- Display Students Table For Admin End -->

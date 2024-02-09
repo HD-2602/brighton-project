@@ -1,0 +1,67 @@
+<!-- Header Start -->
+<div class="container-fluid bg-primary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+      <h3 class="display-3 font-weight-bold text-white">Assign Note And Evaluation</h3>
+      <div class="d-inline-flex text-white">
+        <p class="m-0"><a class="text-white" href="">Home</a></p>
+        <p class="m-0 px-2">/</p>
+        <p class="m-0">Assign Note And Evaluation</p>
+      </div>
+    </div>
+  </div>
+  <!-- Header End -->
+
+<!-- Assign Score and Evaluation Start -->
+<div class="container py-5">
+ <div class="row justify-content-center">
+  <div class="col-lg-8">
+  <div class="bg-light p-5">
+    <h2 class="mb-4">Assign Note And Evaluation To Student</h2>
+    <form [formGroup]="assignNoteForm">
+      <div class="form-group">
+        <label for="note">Note *</label>
+        <input type="number" class="form-control" id="note" formControlName="note"/>
+        <div *ngIf="assignNoteForm.controls['note'].invalid &&
+                  (assignNoteForm.controls['note'].touched ||
+                  assignNoteForm.controls['note'].dirty)">
+                <div *ngIf="assignNoteForm.controls['note'].errors.required" class="text-danger">
+                  Note is required
+                </div>
+                <div *ngIf="assignNoteForm.controls['note'].errors.min" class="text-danger">
+                    Note must be greater than 0 or equal to 0
+                </div>
+                <div *ngIf="assignNoteForm.controls['note'].errors.max" class="text-danger">
+                    Note must be less than 20 or equal to 20
+                  </div>
+              </div>
+      </div>
+      <div class="form-group">
+        <label for="evaluation">Evaluation *</label>
+        <textarea id="evaluation" cols="30" rows="5" class="form-control" formControlName="evaluation"></textarea>
+        <div *ngIf="assignNoteForm.controls['evaluation'].invalid &&
+                  (assignNoteForm.controls['evaluation'].touched ||
+                  assignNoteForm.controls['evaluation'].dirty)">
+                <div *ngIf="assignNoteForm.controls['evaluation'].errors.required" class="text-danger">
+                  Evaluation is required
+                </div>
+                <div *ngIf="assignNoteForm.controls['evaluation'].errors.minlength" class="text-danger">
+                  Evaluation must have at least 10 chars
+                </div>
+                <div *ngIf="assignNoteForm.controls['evaluation'].errors.maxlength" class="text-danger">
+                Evaluation must have at most 300 chars
+                  </div>
+              </div>
+      </div>
+      <div class="form-group mb-0">
+        <input type="submit" value="Assign" class="btn btn-primary px-3" (click)="assignNote()" [disabled]="assignNoteForm.invalid"/>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+</div>
+<!--Assign Score and Evaluation End -->
+
+<div class="container">
+  <button class="btn btn-warning" id="goBack"  type="submit" (click)="goBack()">Go Back</button>
+</div>

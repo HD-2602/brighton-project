@@ -1,0 +1,64 @@
+<!-- Header Start -->
+<div class="container-fluid bg-primary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+        <h3 class="display-3 font-weight-bold text-white">Search Teachers By Speciality</h3>
+        <div class="d-inline-flex text-white">
+            <p class="m-0"><a class="text-white" href="">Home</a></p>
+            <p class="m-0 px-2">/</p>
+            <p class="m-0">Search Teachers</p>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- Part 1 : Search Teachers By Speciality For Teacher Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="text-center pb-2">
+            <p class="section-title px-5">
+                <span class="px-2">To Search </span>
+            </p>
+        </div>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-5">
+                <div class="card border-0">
+                    <div class="card-header bg-secondary text-center p-4">
+                        <h1 class="text-white m-0">Search </h1>
+                    </div>
+                    <div class="card-body rounded-bottom bg-primary p-5">
+                        <form #searchTeachersForm="ngForm" (ngSubmit)="searchTeachers()">
+                            <div class="form-group">
+                                <input type="text" class="form-control border-0 p-4" placeholder="Teacher's speciality"
+                                    [(ngModel)]="teacher.speciality" #speciality="ngModel"
+                                    [ngModelOptions]="{standalone: true}"
+                                    [ngClass]="{ 'is-invalid': searchTeachersForm.submitted && speciality.invalid }"
+                                    required />
+                                <div *ngIf="searchTeachersForm.submitted && speciality.invalid"
+                                    class="invalid-feedback">
+                                    <div *ngIf="speciality.errors.required"> Teacher's speciality is required</div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <button class="btn btn-secondary btn-block border-0 py-3" type="submit">SEARCH</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Part 1 : Search Teachers By Speciality For Teacher End -->
+
+<!-- Part 2 : Display Teachers For Teacher Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div *ngFor="let teacherObj of teachers" class="col-md-6 col-lg-3 text-center team mb-5">
+                <app-teacher [teacherInput]="teacherObj"></app-teacher>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Part 2 : Display Teachers For Teacher End -->

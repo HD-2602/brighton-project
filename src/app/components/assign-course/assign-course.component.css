@@ -1,0 +1,6 @@
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+#goBack {
+    background-color: rgb(185, 68, 22);
+    color: white; 
+     min-width: 100px;
+}

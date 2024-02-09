@@ -1,0 +1,5 @@
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+button.btn {
+    min-width: 100px;
+    margin: 0 2px;
+}

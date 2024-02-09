@@ -1,0 +1,28 @@
+<!-- Header Start -->
+<div class="container-fluid bg-primary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+        <h3 class="display-3 font-weight-bold text-white">Enrolled Students</h3>
+        <div class="d-inline-flex text-white">
+            <p class="m-0"><a class="text-white" href="">Home</a></p>
+            <p class="m-0 px-2">/</p>
+            <p class="m-0">Enrolled Students</p>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- Enrolled Students For Teacher Start -->
+<div class="container">
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+            aria-selected="true" style="color: dodgerblue;">Enrolled Students in this course</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <app-enrolled-students-table></app-enrolled-students-table>
+    </div>
+</div>
+</div>
+<!-- Enrolled Students For Teacher End -->

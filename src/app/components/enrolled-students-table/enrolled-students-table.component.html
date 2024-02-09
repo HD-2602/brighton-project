@@ -1,0 +1,22 @@
+
+<!-- Enrolled Students Table For Teacher Start -->
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let enrolledStudent of enrolledStudentsTab">
+        <td>{{enrolledStudent.enrolledStudents[0].firstName}}</td>
+        <td>{{enrolledStudent.enrolledStudents[0].lastName}}</td>
+        <td>
+            <button class="btn btn-warning" (click)="goToAssignNote(enrolledStudent.studentId)">Assign Note</button>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <!-- Enrolled Students Table For Teacher End -->

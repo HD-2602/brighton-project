@@ -1,0 +1,22 @@
+<!-- Display Parents Table For Admin Start -->
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col" class="text-center">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let parent of parentsTab">
+      <td>{{parent.firstName}}</td>
+      <td>{{parent.lastName}}</td>
+      <td class="text-center">
+        <button class="btn btn-success" (click)="goTo(parent._id, parent.role)">Display</button>
+        <button class="btn btn-danger" (click)="deleteParent(parent._id)">Delete</button>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+<!-- Display Parents Table For Admin End -->

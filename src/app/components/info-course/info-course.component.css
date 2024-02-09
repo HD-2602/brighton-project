@@ -1,0 +1,9 @@
+.scrollable-container {
+    max-height: 300px; /* Adjust the height as needed */
+    overflow-y: auto;
+}
+#goBack {
+    background-color: rgb(185, 68, 22);
+    color: white; 
+     min-width: 100px;
+}

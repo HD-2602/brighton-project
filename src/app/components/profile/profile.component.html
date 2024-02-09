@@ -1,0 +1,341 @@
+<!-- Header Start -->
+<div class="container-fluid bg-primary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+        <h3 class="display-3 font-weight-bold text-white">Welcome {{fName}} {{lName}} </h3>
+        <div class="d-inline-flex text-white">
+            <p class="m-0"><a class="text-white" href="">Home</a></p>
+            <p class="m-0 px-2">/</p>
+            <p class="m-0">Profile</p>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- Profile (Display/Edit) Start -->
+<div class="container-xl px-4 mt-4">
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <!-- Part 1 : Profile Picture (Display/Edit) Start-->
+        <div class="col-xl-4">
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header" style="color: dodgerblue;">Profile Picture</div>
+                <div class="card-body text-center">
+                    <form [formGroup]="pictureForm">
+                        <img class="img-account-profile rounded-circle mb-2" [src]="imagePreview" alt="" id="imgUser">
+                        <div class="small font-italic text-muted mb-4">JPG or PNG or JPEG</div>
+                        <div class="form-group" style="visibility: hidden;">
+                            <input type="file" class="form-control" #picturePicker (change)="onImageSelected($event)">
+                          </div>
+                          <div class="text-center">
+                            <button class="btn btn-warning" (click)="picturePicker.click()">
+                              Select new Image
+                            </button>
+                            <p class="help-block text-danger"></p>
+                          </div>
+                        <button class="btn btn-primary" type="button" (click)="editPicture()">Upload new image</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Part 1 : Profile Picture (Display/Edit) End-->
+
+        <!-- Part 2 : Account details (Display/Edit) Start-->
+        <div class="col-xl-8">
+            <div class="card mb-4">
+                <div class="card-header" style="color: dodgerblue;">Account Details</div>
+                <div class="card-body">
+                    <!-- Account details (Display/Edit) For Student Start-->
+                    <form *ngIf="role == 'student'" [formGroup]="studentProfileForm">
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputFirstName">First name</label>
+                                <input class="form-control" type="text" formControlName="firstName"
+                                    [ngModel]="user?.firstName" placeholder="Enter your first name">
+                                <div *ngIf="studentProfileForm.controls['firstName'].invalid &&
+                                (studentProfileForm.controls['firstName'].touched ||
+                                studentProfileForm.controls['firstName'].dirty)">
+                                    <div *ngIf="studentProfileForm.controls['firstName'].errors.required"
+                                        class="text-danger">
+                                        First Name is required
+                                    </div>
+                                    <div *ngIf="studentProfileForm.controls['firstName'].errors.minlength"
+                                        class="text-danger">
+                                        First Name must have at least 3 chars
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Form Group (last name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLastName">Last name</label>
+                                <input class="form-control" type="text" formControlName="lastName"
+                                    [ngModel]="user?.lastName" placeholder="Enter your last name">
+                                <div *ngIf="studentProfileForm.controls['lastName'].invalid && 
+                                    (studentProfileForm.controls['lastName'].touched ||
+                                    studentProfileForm.controls['lastName'].dirty)">
+                                    <div *ngIf="studentProfileForm.controls['lastName'].errors.required"
+                                        class="text-danger">
+                                        Last Name is required
+                                    </div>
+                                    <div *ngIf="studentProfileForm.controls['lastName'].errors.minlength"
+                                        class="text-danger">
+                                        Last Name must have at least 5 chars
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Form Group (Location)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputLocation">Location</label>
+                            <input class="form-control" type="text" formControlName="address"
+                                [ngModel]="user?.address" placeholder="Enter your location">
+                            <div *ngIf="studentProfileForm.controls['address'].invalid &&
+                                (studentProfileForm.controls['address'].touched ||
+                                studentProfileForm.controls['address'].dirty)">
+                                <div *ngIf="studentProfileForm.controls['address'].errors.required" class="text-danger">
+                                    Address is required
+                                </div>
+                                <div *ngIf="studentProfileForm.controls['address'].errors.minlength"
+                                    class="text-danger">
+                                    Address must have at least 10 chars
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Form Group (email address)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                            <input class="form-control" type="email" formControlName="email" [ngModel]="user?.email"
+                                placeholder="Enter your email address">
+                            <div *ngIf="studentProfileForm.controls['email'].invalid &&
+                                (studentProfileForm.controls['email'].touched ||
+                                studentProfileForm.controls['email'].dirty)">
+                                <div *ngIf="studentProfileForm.controls['email'].errors.required" class="text-danger">
+                                    Email is required
+                                </div>
+                                <div *ngIf="studentProfileForm.controls['email'].errors.email" class="text-danger">
+                                    Format Email Invalid
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Save changes button-->
+                        <button class="btn btn-primary" type="button" (click)="editProfile()">Save changes</button>
+                    </form>
+                    <!-- Account details (Display/Edit) For Student End-->
+
+                    <!-- Account details (Display/Edit) For Teacher Start-->
+                    <form *ngIf="role == 'teacher' " [formGroup]="teacherProfileForm">
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputFirstName">First name</label>
+                                <input class="form-control" type="text" formControlName="firstName"
+                                    [ngModel]="user?.firstName" placeholder="Enter your first name">
+                                <div *ngIf="teacherProfileForm.controls['firstName'].invalid &&
+                                    (teacherProfileForm.controls['firstName'].touched ||
+                                    teacherProfileForm.controls['firstName'].dirty)">
+                                    <div *ngIf="teacherProfileForm.controls['firstName'].errors.required"
+                                        class="text-danger">
+                                        First Name is required
+                                    </div>
+                                    <div *ngIf="teacherProfileForm.controls['firstName'].errors.minlength"
+                                        class="text-danger">
+                                        First Name must have at least 3 chars
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Form Group (last name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLastName">Last name</label>
+                                <input class="form-control" type="text" formControlName="lastName"
+                                    [ngModel]="user?.lastName" placeholder="Enter your last name">
+                                <div *ngIf="teacherProfileForm.controls['lastName'].invalid &&
+                                    (teacherProfileForm.controls['lastName'].touched ||
+                                    teacherProfileForm.controls['lastName'].dirty)">
+                                    <div *ngIf="teacherProfileForm.controls['lastName'].errors.required"
+                                        class="text-danger">
+                                        Last Name is required
+                                    </div>
+                                    <div *ngIf="teacherProfileForm.controls['lastName'].errors.minlength"
+                                        class="text-danger">
+                                        Last Name must have at least 5 chars
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Form Row        -->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (speciality name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputOrgName">Speciality</label>
+                                <input class="form-control" type="text" formControlName="speciality"
+                                    [ngModel]="user?.speciality" placeholder="Enter your speciality name">
+                                <div *ngIf="teacherProfileForm.controls['speciality'].invalid &&
+                                    (teacherProfileForm.controls['speciality'].touched ||
+                                    teacherProfileForm.controls['speciality'].dirty)">
+                                    <div *ngIf="teacherProfileForm.controls['speciality'].errors.required"
+                                        class="text-danger">
+                                        Speciality is required
+                                    </div>
+                                    <div *ngIf="teacherProfileForm.controls['speciality'].errors.minlength"
+                                        class="text-danger">
+                                        Speciality must have at least 3 chars
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Form Group (location)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLocation">Location</label>
+                                <input class="form-control" type="text" formControlName="address"
+                                    [ngModel]="user?.address" placeholder="Enter your location">
+                                <div *ngIf="teacherProfileForm.controls['address'].invalid &&
+                                    (teacherProfileForm.controls['address'].touched ||
+                                    teacherProfileForm.controls['address'].dirty)">
+                                    <div *ngIf="teacherProfileForm.controls['address'].errors.required"
+                                        class="text-danger">
+                                        Address is required
+                                    </div>
+                                    <div *ngIf="teacherProfileForm.controls['address'].errors.minlength"
+                                        class="text-danger">
+                                        Address must have at least 10 chars
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Form Group (email address)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                            <input class="form-control" type="email" formControlName="email" [ngModel]="user?.email"
+                                placeholder="Enter your email address">
+                            <div *ngIf="teacherProfileForm.controls['email'].invalid &&
+                                (teacherProfileForm.controls['email'].touched ||
+                                teacherProfileForm.controls['email'].dirty)">
+                                <div *ngIf="teacherProfileForm.controls['email'].errors.required" class="text-danger">
+                                    Email is required
+                                </div>
+                                <div *ngIf="teacherProfileForm.controls['email'].errors.email" class="text-danger">
+                                    Format Email Invalid
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Input File -->
+                        <div class="form-group" style="visibility: hidden;">
+                            <input type="file" class="form-control" #cvPicker (change)="onCvSelected($event)">
+                        </div>
+
+                        <div class="text-center">
+                            <!-- Display CV -->
+                            <button type="button" class="btn btn-outline-success mr-2" (click)="showCv()">Display CV</button>
+                            <!-- Edit CV -->
+                            <button class="btn btn-warning" (click)="cvPicker.click()">
+                                Select New CV
+                              </button>
+                        </div>
+                        
+                          <div *ngIf="sanitizedPDFUrl" class="text-center mt-3">
+                            <iframe [src]="sanitizedPDFUrl" width="75%" height="300px"></iframe>
+                            <p class="help-block text-danger"></p>
+                          </div>
+                        <button class="btn btn-primary" type="button" (click)="editProfile()">Save Changes</button>
+                    </form>
+                    <!-- Account details (Display/Edit) For Teacher End-->
+
+                    <!-- Account details (Display/Edit) For Parent Start-->
+                    <form *ngIf="role == 'parent' " [formGroup]="parentProfileForm">
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputFirstName">First name</label>
+                                <input class="form-control" type="text" formControlName="firstName"
+                                    [ngModel]="user?.firstName" placeholder="Enter your first name">
+                                <div *ngIf="parentProfileForm.controls['firstName'].invalid &&
+                                    (parentProfileForm.controls['firstName'].touched ||
+                                    parentProfileForm.controls['firstName'].dirty)">
+                                    <div *ngIf="parentProfileForm.controls['firstName'].errors.required" class="text-danger">
+                                        First Name is required
+                                    </div>
+                                    <div *ngIf="parentProfileForm.controls['firstName'].errors.minlength" class="text-danger">
+                                        First Name must have at least 3 chars
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Form Group (last name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLastName">Last name</label>
+                                <input class="form-control" type="text" formControlName="lastName"
+                                    [ngModel]="user?.lastName" placeholder="Enter your last name">
+                                <div *ngIf="parentProfileForm.controls['lastName'].invalid &&
+                                    (parentProfileForm.controls['lastName'].touched ||
+                                    parentProfileForm.controls['lastName'].dirty)">
+                                    <div *ngIf="parentProfileForm.controls['lastName'].errors.required" class="text-danger">
+                                        Last Name is required
+                                    </div>
+                                    <div *ngIf="parentProfileForm.controls['lastName'].errors.minlength" class="text-danger">
+                                        Last Name must have at least 5 chars
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Form Row        -->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (profession name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputOrgName">Profession</label>
+                                <input class="form-control" type="text" formControlName="profession"
+                                    [ngModel]="user?.profession" placeholder="Enter your profession name">
+                                <div *ngIf="parentProfileForm.controls['profession'].invalid &&
+                                    (parentProfileForm.controls['profession'].touched ||
+                                    parentProfileForm.controls['profession'].dirty)">
+                                    <div *ngIf="parentProfileForm.controls['profession'].errors.required" class="text-danger">
+                                        Profession is required
+                                    </div>
+                                    <div *ngIf="parentProfileForm.controls['profession'].errors.minlength" class="text-danger">
+                                        Profession must have at least 5 chars
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Form Group (location)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="inputLocation">Location</label>
+                                <input class="form-control" type="text" formControlName="address"
+                                    [ngModel]="user?.address" placeholder="Enter your location">
+                                <div *ngIf="parentProfileForm.controls['address'].invalid &&
+                                    (parentProfileForm.controls['address'].touched ||
+                                    parentProfileForm.controls['address'].dirty)">
+                                    <div *ngIf="parentProfileForm.controls['address'].errors.required" class="text-danger">
+                                        Address is required
+                                    </div>
+                                    <div *ngIf="parentProfileForm.controls['address'].errors.minlength" class="text-danger">
+                                        Address must have at least 10 chars
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Form Group (email address)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                            <input class="form-control" type="email" formControlName="email" [ngModel]="user?.email"
+                                placeholder="Enter your email address">
+                            <div *ngIf="parentProfileForm.controls['email'].invalid &&
+                                (parentProfileForm.controls['email'].touched ||
+                                parentProfileForm.controls['email'].dirty)">
+                                <div *ngIf="parentProfileForm.controls['email'].errors.required" class="text-danger">
+                                    Email is required
+                                </div>
+                                <div *ngIf="parentProfileForm.controls['email'].errors.email" class="text-danger">
+                                    Format Email Invalid
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Save changes button-->
+                        <button class="btn btn-primary" type="button" (click)="editProfile()">Save changes</button>
+                    </form>
+                    <!-- Account details (Display/Edit) For Parent End-->
+                </div>
+            </div>
+        </div>
+        <!-- Part 2 : Account details (Display/Edit) Endit-->
+    </div>
+</div>
+<!-- Profile (Display/Edit)  End -->

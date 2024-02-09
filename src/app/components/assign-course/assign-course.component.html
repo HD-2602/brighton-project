@@ -1,0 +1,88 @@
+
+<!-- Header Start -->
+<div class="container-fluid bg-primary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+        <h3 class="display-3 font-weight-bold text-white">Assign Course For Student</h3>
+        <div class="d-inline-flex text-white">
+            <p class="m-0"><a class="text-white" href="">Home</a></p>
+            <p class="m-0 px-2">/</p>
+            <p class="m-0">Admin</p>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+  <!-- Assign Course Start -->
+  <div class="container-fluid py-5">
+    <div class="container">
+      <div class="row align-items-center">
+
+        <!-- Part 1 Strat: The first four courses added to student-->
+        <div class="col-lg-7 mb-5 mb-lg-0">
+          <p class="section-title pr-5">
+            <span class="pr-2">Some Courses Which {{fnStudent}} Is Enrolled In</span>
+          </p>
+          <div *ngFor="let registeredCourse of registeredCourses">
+            <app-registered-course [registeredCourseInput]="registeredCourse" (registeredCoursesToSend)="updateEnrollmentCourses($event)"></app-registered-course>
+          </div>
+          <div *ngIf="registeredCourses?.length == 0" class="d-flex align-items-center bg-light shadow-sm rounded overflow-hidden mb-3">
+            <div class="pl-3">
+              <div class="d-flex">
+                <p> {{fnStudent}} is not enrolled in any course</p>
+              </div>
+            </div>
+          </div>
+        </div>
+         <!-- Part 1 End: The first four courses added to student-->
+
+         <!-- Part 2 Start: Assign course to student-->
+        <div class="col-lg-5">
+          <div class="card border-0">
+            <div class="card-header bg-secondary text-center p-4">
+              <h1 class="text-white m-0">Assign Course</h1>
+            </div>
+            <div class="card-body rounded-bottom bg-primary p-5">
+              <form [formGroup]="assignForm">
+                  <div class="form-group">
+                    <div style="color: rgb(185, 68, 22);" class="text-center">
+                      <i  class="fa-solid fa-user-graduate"></i>
+                    <label class="ml-2">Selected Student : {{fnStudent}} {{lnStudent}}</label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div style="color: rgb(185, 68, 22);">
+                      <i class="fa-solid fa-user"></i>
+                      <label class="ml-2"> Select Teacher</label>
+                    </div>
+                    <select class="custom-select border-0 px-4" style="height: 47px" [(ngModel)]="selectedTeacher" formControlName="selectedTeacher" (change)="coursesTeacher(selectedTeacher)">
+                          <option *ngFor="let teacher of teachers" [value]="teacher._id">{{teacher.firstName}} {{teacher.lastName}}</option>
+                    </select>
+                  </div>
+
+                <div class="form-group">
+                  <div style="color: rgb(185, 68, 22);">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                    <label class="ml-2">Select Course</label>
+                  </div>
+                  <select class="custom-select border-0 px-4" style="height: 47px" [(ngModel)]="selectedCourse" formControlName="selectedCourse">
+                        <option *ngFor="let course of courses" [value]="course._id">{{course.courseName}}</option>
+                  </select>
+                </div>
+                <div>
+                  <button class="btn btn-secondary btn-block border-0 py-3" type="submit" (click)="assignCourse()">Assign</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- Part 2 End: Assign course to student-->
+      </div>
+    </div>
+  </div>
+  <!-- Assign Course End -->
+
+<!-- Go Back Button Start -->
+<div class="container">
+    <button class="btn btn-warning" id="goBack"  type="submit" (click)="goBack()">Go Back</button>
+</div>
+<!-- Go Back Button End -->

@@ -1,0 +1,50 @@
+<!-- Header Start -->
+<div class="container-fluid bg-primary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+        <h3 class="display-3 font-weight-bold text-white">Students/ Teachers/ Parents/ Courses</h3>
+        <div class="d-inline-flex text-white">
+            <p class="m-0"><a class="text-white" href="">Home</a></p>
+            <p class="m-0 px-2">/</p>
+            <p class="m-0">Admin</p>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- Admin Table Start -->
+<div class="container">
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+            aria-selected="true">Students</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+            aria-selected="false">Teachers</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="parent-tab" data-toggle="tab" href="#parent" role="tab" aria-controls="parent"
+            aria-selected="false">Parents</a>
+    </li>
+    <li class="nav-item" role="presentation">
+        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+            aria-selected="false">Courses</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <app-students-table></app-students-table>
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <app-teachers-table></app-teachers-table>
+    </div>
+    <div class="tab-pane fade" id="parent" role="tabpanel" aria-labelledby="profile-tab">
+        <app-parents-table></app-parents-table>
+    </div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+       <app-courses-table></app-courses-table>
+    </div>
+</div>
+</div>
+<!-- Admin Table End -->
+

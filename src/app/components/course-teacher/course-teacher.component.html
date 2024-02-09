@@ -1,0 +1,32 @@
+<!-- Courses Of The Teacher Start -->
+<div class="card border-0 bg-light shadow-sm pb-2">
+    <img class="card-img-top mb-2" [src]="courseTeacherInput.avatar" alt="" style="height: 225px;"/>
+    <div class="card-body text-center">
+      <h4 class="card-title" style="color: rgb(235, 132, 15);">{{courseTeacherInput.courseName}}</h4>
+      <p class="card-text">
+        {{courseTeacherInput.description}}
+      </p>
+    </div>
+    <div class="card-footer bg-transparent py-4 px-5">
+      <div class="row border-bottom">
+        <div class="col-6 py-1 text-right border-right">
+          <strong>Class Time</strong>
+        </div>
+        <div class="col-6 py-1">{{courseTeacherInput.duration}}</div>
+      </div>
+      <div class="row">
+        <div class="col-6 py-1 text-right border-right">
+          <strong>Lesson's Price</strong>
+        </div>
+        <div class="col-6 py-1">${{courseTeacherInput.price}} / Month</div>
+      </div>
+    </div>
+    <div class="text-center">
+    <button class="btn btn-primary" (click)="goToEnrolledStudents(courseTeacherInput._id)">Enrolled Students</button>
+    <button class="btn btn-warning" (click)="goToEdit(courseTeacherInput._id)">Edit</button>
+    <button  class="btn btn-danger" (click)="deleteCourse(courseTeacherInput._id)">Delete</button>
+  </div>
+  </div>
+  <!-- Courses Of The Teacher End -->
+
+

@@ -1,0 +1,69 @@
+<!-- Header Start -->
+<div class="container-fluid bg-primary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+        <h3 class="display-3 font-weight-bold text-white">Log In</h3>
+        <div class="d-inline-flex text-white">
+            <p class="m-0"><a class="text-white" href="">Home</a></p>
+            <p class="m-0 px-2">/</p>
+            <p class="m-0">Log In</p>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- Login Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="text-center pb-2">
+            <p class="section-title px-5">
+                <span class="px-2">To LogIn </span>
+            </p>
+        </div>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-5">
+                <div class="card border-0">
+                    <div class="card-header bg-secondary text-center p-4">
+                        <h1 class="text-white m-0">Log In </h1>
+                    </div>
+                    <div class="card-body rounded-bottom bg-primary p-5">
+                        <form [formGroup]="loginForm">
+                            <div class="form-group">
+                                <input type="number" class="form-control border-0 p-4" placeholder="Phone Number"
+                                    formControlName="tel" />
+                            </div>
+                            <div *ngIf="loginForm.controls['tel'].invalid &&
+                                 (loginForm.controls['tel'].touched ||
+                                 loginForm.controls['tel'].dirty)">
+                                <div *ngIf="loginForm.controls['tel'].errors.required" class="text-danger">
+                                    Tel is required
+                                </div>
+                                <div *ngIf="loginForm.controls['tel'].errors.pattern" class="text-danger">
+                                    Tel must have 8 numbers 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control border-0 p-4" placeholder="Password"
+                                    formControlName="password"/>
+                            </div>
+                            <div *ngIf="loginForm.controls['password'].invalid &&
+                                 (loginForm.controls['password'].touched ||
+                                 loginForm.controls['password'].dirty)">
+                                <div *ngIf="loginForm.controls['password'].errors.required" class="text-danger">
+                                    Password is required
+                                </div>
+                                <div *ngIf="loginForm.controls['password'].errors.pattern" class="text-danger">
+                                    Password must contain more than 8 characters, 1 numeric, 1 upper case letter, and 1 special character($@$!%*?&)
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-secondary btn-block border-0 py-3" (click)="login()"
+                                    [disabled]="loginForm.invalid" type="submit">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Login End -->

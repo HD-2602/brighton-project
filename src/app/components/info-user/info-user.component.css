@@ -1,0 +1,9 @@
+#goBack {
+    background-color: rgb(185, 68, 22);
+    color: white; 
+     min-width: 100px;
+}
+#imgUser{
+    width: 250px;
+     height: 250px;
+}

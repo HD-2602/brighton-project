@@ -1,0 +1,148 @@
+<!-- Header Start -->
+<div class="container-fluid bg-primary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+        <h3 class="display-3 font-weight-bold text-white">Welcome Admin</h3>
+        <div class="d-inline-flex text-white">
+            <p class="m-0"><a class="text-white" href="">Home</a></p>
+            <p class="m-0 px-2">/</p>
+            <p class="m-0">Profile User</p>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- Info Parent/Teacher For Admin Start -->
+<div class="container-xl px-4 mt-4">
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <!-- Profile Picture of Parent/Teacher For Admin Start -->
+        <div class="col-xl-4">
+            <div class="card mb-4 mb-xl-0" style="height: 375px;">
+                <div class="card-header" style="color: dodgerblue;">Profile Picture</div>
+                <div class="card-body text-center">
+                    <form>
+                        <img class="img-account-profile rounded-circle mb-2" [src]="imagePreview" alt="" id="imgUser">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Profile Picture of Parent/Teacher For Admin End -->
+
+        <!-- Account Details of Parent/Teacher For Admin Start -->
+        <div class="col-xl-8">
+            <div class="card mb-4">
+                <div class="card-header" style="color: dodgerblue;">Account Details</div>
+                <div class="card-body">
+
+                    <!-- Account Details of Teacher For Admin Start -->
+                    <form *ngIf="role == 'teacher' " [formGroup]="teacherInfoForm">
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1">First name</label>
+                                <input class="form-control" type="text" formControlName="firstName" 
+                                [(ngModel)]="user.firstName"  readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1">Last name</label>
+                                <input class="form-control" type="text" formControlName="lastName"
+                                [(ngModel)]="user.lastName" readonly>
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1">Speciality</label>
+                                <input class="form-control" type="text" formControlName="speciality"
+                                [(ngModel)]="user.speciality" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1">Location</label>
+                                <input class="form-control" type="text" formControlName="address"
+                                [(ngModel)]="user.address" readonly>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1">Email address</label>
+                            <input class="form-control" type="email" formControlName="email"
+                            [(ngModel)]="user.email" readonly>
+                        </div>
+                        <button class="btn btn-primary" type="button" (click)="showCv()">Display CV</button>
+                    </form>
+                    <!-- Account Details of Teacher For Admin End -->
+
+                    <!-- Account Details of Parent For Admin Start -->
+                    <form *ngIf="role == 'parent' " [formGroup]="parentInfoForm">
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1">First name</label>
+                                <input class="form-control" type="text" formControlName="firstName"
+                                [(ngModel)]="user.firstName" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1">Last name</label>
+                                <input class="form-control" type="text" formControlName="lastName"
+                                [(ngModel)]="user.lastName" readonly>
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1">Profession</label>
+                                <input class="form-control" type="text" formControlName="profession"
+                                [(ngModel)]="user.profession" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1">Location</label>
+                                <input class="form-control" type="text" formControlName="address"
+                                [(ngModel)]="user.address" readonly>
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small mb-1">Child's Number Phone</label>
+                                <input class="form-control" type="text" formControlName="childTel"
+                                [(ngModel)]="user.childTel" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small mb-1">Child's Name</label>
+                                <input class="form-control" type="text" formControlName="childName"
+                                [(ngModel)]="user.childName" readonly>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small mb-1">Email address</label>
+                            <input class="form-control" type="email" formControlName="email"
+                            [(ngModel)]="user.email" readonly>
+                        </div>
+                    </form>
+                    <!-- Account Details of Parent For Admin End -->
+
+                </div>
+            </div>
+        </div>
+        <!-- Account Details of Parent/Teacher For Admin End -->
+    </div>
+</div> 
+<!-- Info Parent/Teacher For Admin End -->
+
+
+<!-- Teacher's Courses For Admin Start -->
+<div *ngIf="role == 'teacher'" class="container-fluid pt-5">
+    <div class="container">
+      <div class="text-center pb-2">
+        <p class="section-title px-5">
+          <span class="px-2">Teacher's Courses</span>
+        </p>
+      </div>
+      <div class="row justify-content-center">
+        <div *ngFor="let course of courses" class="col-lg-2 mb-5">
+          <app-course-admin [courseAdminInput]="course"></app-course-admin>
+        </div>
+        <div *ngIf="courses?.length == 0" class="text-center"> {{firstName}} haven't any course</div>
+      </div>
+    </div>
+  </div>
+  <!-- Teacher's Courses For Admin End -->
+
+<!-- Go Back Button -->
+  <div class="container">
+    <button class="btn btn-warning" id="goBack"  type="submit" (click)="goBack()">Go Back</button>
+</div>

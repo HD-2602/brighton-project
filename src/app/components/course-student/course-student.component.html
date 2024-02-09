@@ -1,0 +1,35 @@
+<!-- Display Course with Teacher's Name For Student and For Parent Start -->
+<div class="card border-0 bg-light shadow-sm pb-2">
+  <img class="card-img-top mb-2" [src]="courseStudentInput.course[0].avatar" alt="" style="height: 225px;" />
+  <div class="card-body text-center">
+    <h4 class="card-title" style="color: rgb(235, 132, 15);">{{courseStudentInput.course[0].courseName}}</h4>
+    <p class="card-text">
+      {{courseStudentInput.course[0].description}}
+    </p>
+  </div>
+  <div class="card-footer bg-transparent py-4 px-5">
+    <div class="row border-bottom">
+      <div class="col-6 py-1 text-right border-right">
+        <strong style="color: rgb(110, 201, 19);">Teacher</strong>
+      </div>
+      <div class="col-6 py-1" style="color: rgb(110, 201, 19);">{{courseStudentInput.teacher[0].firstName}}</div>
+    </div>
+    <div class="row border-bottom">
+      <div class="col-6 py-1 text-right border-right">
+        <strong>Class Time</strong>
+      </div>
+      <div class="col-6 py-1">{{courseStudentInput.course[0].duration}}</div>
+    </div>
+    <div class="row">
+      <div class="col-6 py-1 text-right border-right">
+        <strong>Lesson's Price</strong>
+      </div>
+      <div class="col-6 py-1">${{courseStudentInput.course[0].price}} / Month</div>
+    </div>
+  </div>
+  <div class="text-center">
+    <button class="btn btn-warning" (click)="showNote(courseStudentInput.course[0]._id)">Note</button>
+    <button class="btn btn-warning" (click)="showEvaluation(courseStudentInput.course[0]._id)">Evaluation</button>
+  </div>
+</div>
+<!-- Display Course with Teacher's Name For Student and For Parent End -->

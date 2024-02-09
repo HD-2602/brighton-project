@@ -1,0 +1,33 @@
+<!-- Display Teachers Table For Admin Start -->
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Speciality</th>
+      <th scope="col" class="text-center">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let teacher of teachersTab">
+      <td>
+        <ng-container *ngIf="teacher.status === 'on hold'">
+          <i class="fa-solid fa-user-plus" style="color: red"></i>
+        </ng-container>
+        <ng-container *ngIf="teacher.status === 'confirmed'">
+          <i class="fa-solid fa-user-check" style="color: green;"></i>
+        </ng-container>
+      </td>
+      <td>{{teacher.firstName}}</td>
+      <td>{{teacher.lastName}}</td>
+      <td>{{teacher.speciality}}</td>
+      <td class="text-center">
+        <button class="btn btn-warning" (click)="confirmTeacher(teacher._id)">Confirm</button>
+        <button class="btn btn-success" (click)="goTo(teacher._id, teacher.role)">Display</button>
+        <button class="btn btn-danger" (click)="deleteTeacher(teacher._id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Display Teachers Table For Admin End -->

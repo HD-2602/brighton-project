@@ -1,0 +1,33 @@
+<!-- Filter By Courses' Name Start -->
+<div>
+  <form>
+    <div class="control-group">
+      <label style="color: rgb(22, 167, 22);">Filter By Name Of Course</label>
+      <input style="border-color: rgb(22, 167, 22);" type="text" class="form-control" [(ngModel)]="term" name="term"/>
+    </div>
+  </form>
+</div>
+<!-- Filter By Courses' Name End -->
+
+<!-- Courses For Admin Start -->
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Teacher's Name</th>
+        <th scope="col" class="text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let course of coursesTab | myFilter : term">
+        <td>{{course.courseName}}</td>
+        <td>{{course.teacher[0].firstName}} {{course.teacher[0].lastName}}</td>
+        <td class="text-center">
+          <button class="btn btn-success" (click)="displayCourse(course._id)">Display</button>
+          <button class="btn btn-danger" (click)="deleteCourse(course._id)">Delete</button>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <!-- Courses For Admin End -->
